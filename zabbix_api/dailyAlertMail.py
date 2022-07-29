@@ -93,7 +93,7 @@ def getAllHostList():
 		hostIDs = []
 
 		for hostObj in hostlist['result']:
-	
+
 			hostDict[hostObj['hostid']] = hostObj['host']
 			hostIDs.append(hostObj['hostid'])
 
@@ -104,9 +104,12 @@ def getAllHostList():
 	
 def getTime():
 
-	yesterday = date.today() - timedelta(1)
-	reqTime = time.mktime(datetime.strptime(yesterday.strftime('%d/%m/%Y'), "%d/%m/%Y").timetuple())
-	return reqTime
+    yesterday = date.today() - timedelta(1)
+    return time.mktime(
+        datetime.strptime(
+            yesterday.strftime('%d/%m/%Y'), "%d/%m/%Y"
+        ).timetuple()
+    )
 
 
 #######################################################################

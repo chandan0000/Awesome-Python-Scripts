@@ -7,7 +7,5 @@ def getDict(file):
 
 def isEng(word):
 	englishWords = getDict("dictionary.txt")
-	if word in englishWords:
-		return True
-	return False
+	return word in englishWords
 print(isEng("boot"))
