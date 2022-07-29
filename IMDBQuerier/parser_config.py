@@ -56,11 +56,7 @@ def check_year(year_range):
 
 
 def check_type(film_type):
-    if  parse_options['type'] == 'both':
-        return True
-    elif  parse_options['type'] == film_type:
-        return True
-    return False
+    return parse_options['type'] in ['both', film_type]
 
 def watched_included():
     return parse_options['include_watched']
@@ -74,9 +70,8 @@ def check_film_object(film_object, watched_films=None):
         return False
     if film_object.type == 'film' and not check_year(film_object.year):
         return False
-    if not check_type(film_object.type):
-        return False
-    if watched_films is not None and film_object.name in watched_films:
-        return False
-    # All of the above rules applied for the object
-    return True
+    return (
+        watched_films is None or film_object.name not in watched_films
+        if check_type(film_object.type)
+        else False
+    )
